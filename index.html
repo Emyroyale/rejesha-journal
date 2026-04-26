@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Rejesha Journal — Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    body { margin: 0; background: #060c22; }
+    /* Simulate Blogger's top announcement bar */
+    .blogger-topbar {
+      background: #1d5c1a;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+    .blogger-topbar a {
+      background: #f5a623;
+      color: #06091a;
+      padding: 6px 16px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .blogger-topbar a:hover { background: #e8930a; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Blogger Announcement Bar (unchanged) ── -->
+  <div class="blogger-topbar">
+    Kenyan Diaspora Apparel — Wear Your Roots
+    <a href="https://rejesha.store" target="_blank">SHOP NOW →</a>
+  </div>
+
+  <!-- ── Hero Section ── -->
+  <section class="rj-hero" id="rj-hero">
+
+    <!-- Background layers -->
+    <canvas id="rj-stars"></canvas>
+    <div class="rj-orb rj-orb-1"></div>
+    <div class="rj-orb rj-orb-2"></div>
+    <div class="rj-orb rj-orb-3"></div>
+
+    <!-- Content -->
+    <div class="rj-content">
+
+      <div class="rj-badge">Kenyan Diaspora &mdash; U.S. Edition</div>
+
+      <h1 class="rj-title">
+        The Rejesha <em>Journal</em>
+      </h1>
+
+      <div class="rj-rule">
+        <span></span>
+        <div class="rj-rule-dot"></div>
+        <span></span>
+      </div>
+
+      <div class="rj-typewriter-wrap">
+        <span class="rj-typewriter">
+          <span id="rj-typewriter-text"></span><span class="rj-cursor"></span>
+        </span>
+      </div>
+
+      <p class="rj-subtitle">
+        Real stories from the Kenyan diaspora in America.<br />
+        Immigration. Identity. Life Ya Majuu.
+      </p>
+
+      <div class="rj-cta">
+        <a href="/search/label/Immigration" class="rj-btn-primary">Read Stories</a>
+        <a href="https://rejesha.store" class="rj-btn-secondary" target="_blank">Shop Rejesha →</a>
+      </div>
+
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="rj-scroll">
+      <span class="rj-scroll-label">Scroll</span>
+      <div class="rj-scroll-line"></div>
+    </div>
+
+    <!-- Scrolling marquee strip -->
+    <div class="rj-marquee-wrap" aria-hidden="true">
+      <div class="rj-marquee">
+        <!-- Duplicate items for seamless loop -->
+        <span class="rj-marquee-item">Immigration Reality</span>
+        <span class="rj-marquee-dot">✦</span>
+        <span class="rj-marquee-item">Career &amp; Money</span>
+        <span class="rj-marquee-dot">✦</span>
+        <span class="rj-marquee-item">Finance &amp; Stability</span>
+        <span class="rj-marquee-dot">✦</span>
+        <span class="rj-marquee-item">Kenyan Diaspora</span>
+        <span class="rj-marquee-dot">✦</span>
+        <span class="rj-marquee-item">Culture &amp; Identity</span>
+        <span class="rj-marquee-dot">✦</span>
+        <span class="rj-marquee-item">Life Ya Majuu</span>
+        <span class="rj-marquee-dot">✦</span>
+        <span class="rj-marquee-item">You Belong Here</span>
+        <span class="rj-marquee-dot">✦</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="rj-marquee-item">Immigration Reality</span>
+        <span class="rj-marquee-dot">✦</span>
+        <span class="rj-marquee-item">Career &amp; Money</span>
+        <span class="rj-marquee-dot">✦</span>
+        <span class="rj-marquee-item">Finance &amp; Stability</span>
+        <span class="rj-marquee-dot">✦</span>
+        <span class="rj-marquee-item">Kenyan Diaspora</span>
+        <span class="rj-marquee-dot">✦</span>
+        <span class="rj-marquee-item">Culture &amp; Identity</span>
+        <span class="rj-marquee-dot">✦</span>
+        <span class="rj-marquee-item">Life Ya Majuu</span>
+        <span class="rj-marquee-dot">✦</span>
+        <span class="rj-marquee-item">You Belong Here</span>
+        <span class="rj-marquee-dot">✦</span>
+      </div>
+    </div>
+
+  </section>
+
+  <script src="assets/scripts.js"></script>
+</body>
+</html>
