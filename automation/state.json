@@ -1,6 +1,6 @@
 {
   "last_run": "2026-04-26",
-  "pillar_index": 1,
+  "pillar_index": 2,
   "pillars": {
     "Immigration Reality": {
       "used": [
@@ -59,8 +59,60 @@
       ]
     },
     "Career & Money": {
-      "used": [],
-      "remaining": []
+      "used": [
+        "Career pivots for Kenyans who came here to study but want to stay"
+      ],
+      "remaining": [
+        "How to use LinkedIn effectively as an African immigrant job seeker",
+        "Building a US resume from scratch when your experience is from Kenya",
+        "Work-life balance in America: What Kenyans are often shocked to discover",
+        "How to start a small business in the US as a green card holder",
+        "How Kenyan nurses are navigating the US healthcare system",
+        "Starting a cleaning or landscaping business in the US: A practical guide",
+        "How to negotiate your first salary as a Kenyan immigrant in the US",
+        "Driving for Uber/Lyft as a Kenyan immigrant: What you need to know",
+        "How immigrant entrepreneurs are building businesses in the Kenyan diaspora",
+        "The truth about being overqualified in the US job market as an immigrant",
+        "How to get a US professional certification in nursing, accounting, or IT",
+        "Freelancing in the US as an immigrant: What you legally can and cannot do",
+        "How accent bias affects Kenyan workers and how to navigate it confidently",
+        "The best cities for Kenyan professionals: Salaries, cost of living, community",
+        "Transitioning from nursing in Kenya to nursing in America: Real talk",
+        "Government grants and loans for minority-owned small businesses",
+        "How to handle workplace discrimination as an African immigrant",
+        "How to transfer your Kenyan professional license or credentials to the US",
+        "How to build a professional network in your city from zero contacts",
+        "Understanding bonuses, RSUs, and stock options at US tech companies",
+        "How to handle being the only Black or African person in your US workplace",
+        "How to send money home to Kenya while building wealth in the US",
+        "Understanding 401(k) plans and why you should start contributing now",
+        "The unspoken rules of American office culture Kenyans must know",
+        "The immigrant's guide to performance reviews in American companies",
+        "How to handle gaps in your US employment history on a resume",
+        "The best US states for starting a business as an immigrant",
+        "Side hustles that work for Kenyan immigrants with work authorization",
+        "Top industries hiring Kenyan professionals in America right now",
+        "How to protect yourself from wage theft as an immigrant worker",
+        "US government jobs for immigrants: What's available and what's not",
+        "How to write a cover letter that doesn't sound like a formal Kenyan letter",
+        "How to get licensed as a teacher in the US if you taught in Kenya",
+        "How to build US work experience while on an OPT or STEM OPT extension",
+        "How to open a business bank account in the US with an ITIN",
+        "How to use FAFSA and scholarships as an immigrant student",
+        "How to build a personal brand as a Kenyan professional in America",
+        "How to find a Kenyan mentor or career coach in your US city",
+        "How to ask for a promotion without sounding too aggressive or too passive",
+        "How to use temp agencies to build US work experience quickly",
+        "Remote work opportunities for Kenyan immigrants across the US",
+        "How to find a job sponsor willing to support your H-1B visa",
+        "Networking in America: How it differs from Kenya and how to master it",
+        "How to transition from a survival job to a career job as an immigrant",
+        "Understanding health insurance through your employer: What to choose",
+        "Surviving the first 90 days at a US corporate job when you're from Kenya",
+        "Understanding your first US paycheck: Taxes, deductions, and withholding",
+        "Email communication styles at work: How American offices differ from Kenyan",
+        "Getting into tech from Kenya: Bootcamps, certifications, and pathways"
+      ]
     },
     "Finance & Stability": {
       "used": [],
