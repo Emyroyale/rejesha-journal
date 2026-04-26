@@ -29,10 +29,10 @@ PILLAR_ORDER = [
 ]
 
 PILLAR_IMAGE_QUERIES = {
-    "Immigration Reality":  "immigration america passport",
-    "Career & Money":       "professional career office success",
-    "Finance & Stability":  "money savings finance",
-    "Culture & Identity":   "african community family culture",
+    "Immigration Reality":  "kenya nairobi africa travel diaspora",
+    "Career & Money":       "african professional business office career",
+    "Finance & Stability":  "african savings money home finance",
+    "Culture & Identity":   "kenya africa community celebration culture",
 }
 
 PILLAR_LABELS = {
@@ -270,7 +270,7 @@ def fetch_printify_product():
 STYLES = """
 <style>
 /* Rejesha Journal article styles */
-.rj-article-wrap { max-width: 740px; margin: 0 auto; font-family: 'Merriweather', Georgia, serif; color: #1a1a1a; line-height: 1.8; }
+.rj-article-wrap { max-width: 740px; margin: 0 auto; font-family: 'Merriweather', Georgia, serif; color: #1a1a1a; line-height: 1.8; background: #fff; padding: 2.5rem 2rem; border-radius: 6px; box-shadow: 0 2px 24px rgba(0,0,0,0.18); }
 .rj-cover-img { width: 100%; max-height: 460px; object-fit: cover; border-radius: 4px; margin-bottom: 1.5rem; }
 .rj-article-wrap h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 2.2rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; color: #0a0a0a; }
 .rj-article-wrap h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; margin: 2rem 0 0.75rem; color: #111; }
