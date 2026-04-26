@@ -15,7 +15,8 @@ import requests
 from datetime import datetime, timezone, timedelta
 
 import anthropic
-from google.oauth2 import service_account
+from google.oauth2.credentials import Credentials
+from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 
 # ── Config ────────────────────────────────────────────────────────────────────
@@ -48,7 +49,6 @@ INTERNAL_LINKS = {
     "Culture & Identity":   "https://emyroyale254.blogspot.com/search/label/Culture%20%26%20Identity",
 }
 
-BLOGGER_SCOPES = ["https://www.googleapis.com/auth/blogger"]
 STATE_FILE     = os.path.join(os.path.dirname(__file__), "state.json")
 TOPICS_FILE    = os.path.join(os.path.dirname(__file__), "topics.json")
 
@@ -346,18 +346,26 @@ def build_html(article_html, image_data, product_data, pillar):
 # ── Blogger Publishing ────────────────────────────────────────────────────────
 
 def publish_to_blogger(title, html, pillar):
-    """Publish the post to Blogger via service account credentials."""
-    creds_json = os.environ.get("BLOGGER_CREDENTIALS_JSON", "")
-    blog_id    = os.environ.get("BLOGGER_BLOG_ID", "")
+    """Publish the post to Blogger via OAuth2 refresh token."""
+    client_id     = os.environ.get("GOOGLE_CLIENT_ID", "")
+    client_secret = os.environ.get("GOOGLE_CLIENT_SECRET", "")
+    refresh_token = os.environ.get("GOOGLE_REFRESH_TOKEN", "")
+    blog_id       = os.environ.get("BLOGGER_BLOG_ID", "")
 
-    if not creds_json or not blog_id:
-        print("[Blogger] Missing credentials — cannot publish.")
+    if not all([client_id, client_secret, refresh_token, blog_id]):
+        print("[Blogger] Missing OAuth credentials — cannot publish.")
         return None
 
-    credentials_info = json.loads(creds_json)
-    credentials = service_account.Credentials.from_service_account_info(
-        credentials_info, scopes=BLOGGER_SCOPES
+    credentials = Credentials(
+        token=None,
+        refresh_token=refresh_token,
+        token_uri="https://oauth2.googleapis.com/token",
+        client_id=client_id,
+        client_secret=client_secret,
+        scopes=["https://www.googleapis.com/auth/blogger"],
     )
+    # Force a token refresh before use
+    credentials.refresh(Request())
 
     service = build("blogger", "v3", credentials=credentials)
 
