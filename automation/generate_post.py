@@ -3,7 +3,7 @@
 Rejesha Journal — Automated Blog Post Generator
 Runs daily at 9am CT via GitHub Actions.
 Rotates through 4 pillars, generates SEO articles with Claude,
-fetches Unsplash images, adds a Printify T-shirt widget, and publishes to Blogger.
+fetches Pixabay images, adds a Printify T-shirt widget, and publishes to Blogger.
 """
 
 import os
@@ -27,11 +27,11 @@ PILLAR_ORDER = [
     "Culture & Identity",
 ]
 
-PILLAR_UNSPLASH_QUERIES = {
-    "Immigration Reality":  "immigration paperwork passport america",
-    "Career & Money":       "professional office career success",
-    "Finance & Stability":  "money savings finance home",
-    "Culture & Identity":   "african community culture family",
+PILLAR_IMAGE_QUERIES = {
+    "Immigration Reality":  "immigration america passport",
+    "Career & Money":       "professional career office success",
+    "Finance & Stability":  "money savings finance",
+    "Culture & Identity":   "african community family culture",
 }
 
 PILLAR_LABELS = {
@@ -176,52 +176,50 @@ Write the full HTML article now."""
     return content, title, meta
 
 
-# ── Unsplash Image ────────────────────────────────────────────────────────────
+# ── Pixabay Image ─────────────────────────────────────────────────────────────
 
-def fetch_unsplash_image(pillar):
-    """Fetch a relevant image from Unsplash and return image data."""
-    key   = os.environ.get("UNSPLASH_ACCESS_KEY", "")
-    query = PILLAR_UNSPLASH_QUERIES[pillar]
+def fetch_pixabay_image(pillar):
+    """Fetch a relevant image from Pixabay and return image data."""
+    key   = os.environ.get("PIXABAY_API_KEY", "")
+    query = PILLAR_IMAGE_QUERIES[pillar]
 
     if not key:
-        print("[Unsplash] No API key — skipping image.")
+        print("[Pixabay] No API key — skipping image.")
         return None
 
     try:
         resp = requests.get(
-            "https://api.unsplash.com/search/photos",
-            headers={"Authorization": f"Client-ID {key}"},
-            params={"query": query, "per_page": 10, "orientation": "landscape"},
+            "https://pixabay.com/api/",
+            params={
+                "key":          key,
+                "q":            query,
+                "image_type":   "photo",
+                "orientation":  "horizontal",
+                "per_page":     10,
+                "safesearch":   "true",
+                "min_width":    1000,
+            },
             timeout=10,
         )
         resp.raise_for_status()
-        results = resp.json().get("results", [])
-        if not results:
+        hits = resp.json().get("hits", [])
+        if not hits:
             return None
 
-        photo      = random.choice(results[:5])
-        image_url  = photo["urls"]["regular"]
-        thumb_url  = photo["urls"]["small"]
-        photo_link = photo["links"]["html"] + "?utm_source=rejesha_journal&utm_medium=referral"
-        user_name  = photo["user"]["name"]
-        user_link  = photo["user"]["links"]["html"] + "?utm_source=rejesha_journal&utm_medium=referral"
+        photo     = random.choice(hits[:5])
+        image_url = photo.get("largeImageURL") or photo.get("webformatURL")
+        user_name = photo.get("user", "Pixabay")
+        page_url  = photo.get("pageURL", "https://pixabay.com")
 
-        # Trigger download endpoint as required by Unsplash API guidelines
-        dl_url = photo.get("links", {}).get("download_location")
-        if dl_url:
-            requests.get(dl_url, headers={"Authorization": f"Client-ID {key}"}, timeout=5)
-
-        print(f"[Unsplash] Image by {user_name}")
+        print(f"[Pixabay] Image by {user_name}")
         return {
             "url":       image_url,
-            "thumb":     thumb_url,
-            "photo_link": photo_link,
             "user_name": user_name,
-            "user_link": user_link,
+            "page_url":  page_url,
         }
 
     except Exception as e:
-        print(f"[Unsplash] Error: {e}")
+        print(f"[Pixabay] Error: {e}")
         return None
 
 
@@ -312,7 +310,7 @@ def build_html(article_html, image_data, product_data, pillar):
     if image_data:
         cover_html = f"""
 <img class="rj-cover-img" src="{image_data['url']}" alt="{pillar} — The Rejesha Journal" loading="lazy">
-<p class="rj-photo-credit">Photo by <a href="{image_data['user_link']}">{image_data['user_name']}</a> on <a href="https://unsplash.com?utm_source=rejesha_journal">Unsplash</a></p>
+<p class="rj-photo-credit">Photo by <a href="{image_data['page_url']}" target="_blank" rel="noopener">{image_data['user_name']}</a> via <a href="https://pixabay.com" target="_blank" rel="noopener">Pixabay</a></p>
 """
 
     # Pillar tag
@@ -409,7 +407,7 @@ def main(dry_run=False):
     print(f"Meta   : {meta[:80] if meta else 'N/A'}")
 
     # Fetch image
-    image_data = fetch_unsplash_image(pillar)
+    image_data = fetch_pixabay_image(pillar)
 
     # Fetch product widget
     product_data = fetch_printify_product()
