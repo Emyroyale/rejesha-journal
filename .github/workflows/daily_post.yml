@@ -50,9 +50,11 @@ jobs:
         run: |
           git config user.email "bot@rejesha.store"
           git config user.name "Rejesha Bot"
-          git stash || true
-          git pull --rebase origin main
-          git stash pop || true
           git add automation/state.json
-          git diff --staged --quiet || git commit -m "state: $(date '+%Y-%m-%d') post published"
-          git push origin main
+          git diff --staged --quiet && echo "No state changes" && exit 0
+          git commit -m "state: $(date '+%Y-%m-%d') post published"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin main && break
+            echo "Push attempt $i failed, retrying..."
+            sleep 5
+          done
