@@ -1,0 +1,53 @@
+name: Daily Blog Post
+
+on:
+  schedule:
+    - cron: '0 14 * * *'   # 9am CDT (Mar–Nov), UTC-5
+    - cron: '0 15 * * *'   # 9am CST (Nov–Mar), UTC-6
+  workflow_dispatch:        # Manual trigger for testing
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # Needed to commit state.json back to repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('automation/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install -r automation/requirements.txt
+
+      - name: Generate and publish post
+        run: python automation/generate_post.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BLOGGER_CREDENTIALS_JSON: ${{ secrets.BLOGGER_CREDENTIALS_JSON }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          PRINTIFY_API_KEY: ${{ secrets.PRINTIFY_API_KEY }}
+          PRINTIFY_SHOP_ID: ${{ secrets.PRINTIFY_SHOP_ID }}
+
+      - name: Commit updated state
+        run: |
+          git config user.email "bot@rejesha.store"
+          git config user.name "Rejesha Bot"
+          git add automation/state.json
+          git diff --staged --quiet || git commit -m "state: $(date '+%Y-%m-%d') post published"
+          git push
