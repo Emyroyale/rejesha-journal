@@ -52,4 +52,5 @@ jobs:
           git config user.name "Rejesha Bot"
           git add automation/state.json
           git diff --staged --quiet || git commit -m "state: $(date '+%Y-%m-%d') post published"
+          git pull --rebase origin main
           git push
