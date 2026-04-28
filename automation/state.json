@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-04-27",
-  "pillar_index": 6,
+  "last_run": "2026-04-28",
+  "pillar_index": 7,
   "pillars": {
     "Immigration Reality": {
       "used": [
@@ -116,10 +116,10 @@
     },
     "Finance & Stability": {
       "used": [
-        "Building an emergency fund on an immigrant's salary"
+        "Building an emergency fund on an immigrant's salary",
+        "Understanding the US tax treaty between Kenya and the United States"
       ],
       "remaining": [
-        "Understanding the US tax treaty between Kenya and the United States",
         "How to create a will and estate plan as an immigrant in the US",
         "How to avoid predatory lenders targeting immigrants in the US",
         "How to transfer a Kenyan pension to a US retirement account",
